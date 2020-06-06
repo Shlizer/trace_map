@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { computed, decorate } from 'mobx'
 import { observer } from 'mobx-react'
 import store from '../../store'
@@ -31,6 +32,13 @@ class MarkerList extends React.Component {
       </div>
     )
   }
+}
+
+MarkerList.propTypes = {
+  id: PropTypes.string.isRequired,
+  travel: PropTypes.bool.isRequired,
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired
 }
 
 decorate(MarkerList, {

@@ -7,12 +7,9 @@ import store from '../../store'
 import styles from './style.module.scss'
 
 class GoogleMap extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      center: { lat: 52.5, lng: 18.8 },
-      zoom: 7
-    }
+  state = {
+    center: { lat: 52.5, lng: 18.8 },
+    zoom: 7
   }
 
   get mapOptions() {

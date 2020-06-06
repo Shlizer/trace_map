@@ -5,12 +5,7 @@ import MarkerFromList from './marker'
 import styles from './style.module.scss'
 
 class MarkerList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      opened: true
-    }
-  }
+  state = { opened: true }
 
   get classes() {
     return [styles.list, this.state.opened ? '' : styles.closed].join(' ')
@@ -29,7 +24,7 @@ class MarkerList extends React.Component {
       <div className={this.classes}>
         <div className={styles.toggler} onClick={this.toggleOpen} />
         <input type='text' value={store.filter} onChange={this.changeFilter} placeholder='Filtruj...' />
-        {store.list.map(truck => <MarkerFromList id={truck.id} {...truck} />)}
+        {store.list.map(truck => <MarkerFromList key={truck.id} {...truck} />)}
       </div>
     )
   }

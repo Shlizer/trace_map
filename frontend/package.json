@@ -15,20 +15,19 @@
   "dependencies": {
     "node-sass": "^4.14.1",
     "lato-font": "^3.0.0",
-    "google-map-react": "1.1.7",
+    "google-map-react": "^1.1.7",
     "react": "^16.12.0",
     "react-app-rewire-hot-loader": "^2.0.1",
     "react-app-rewired": "^2.1.6",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.21",
-    "react-hooks-worker": "0.9.0",
-    "mobx-react": "6.2.2",
-    "mobx": "5.15.4",
-    "prop-types": "15.7.2",
-    "superagent": "5.2.2"
+    "mobx-react": "^6.2.2",
+    "mobx": "^5.15.4",
+    "prop-types": "^15.7.2",
+    "superagent": "^5.2.2"
   },
   "devDependencies": {
-    "react-scripts": "3.4.0"
+    "react-scripts": "^3.4.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
