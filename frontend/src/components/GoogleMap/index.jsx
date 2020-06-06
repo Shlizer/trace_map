@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import GoogleMapReact from 'google-map-react'
-import GoogleApiKey from './googleApiKey'
+import GoogleApiKey from '../../googleApiKey'
 import Marker from './marker'
 import store from '../../store'
 import styles from './style.module.scss'
