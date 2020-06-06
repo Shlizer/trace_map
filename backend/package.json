@@ -1,0 +1,33 @@
+{
+  "name": "trace-map-backend",
+  "description": "Backend part for map tracer program",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shlizer/trace-map/trace-map.git"
+  },
+  "author": {
+    "name": "Krzysiek 'Shlizer' Hinc",
+    "email": "hinc.krzysiek+github@gmail.com",
+    "url": "https://khinc.pl"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "printWidth": 200
+  }
+}

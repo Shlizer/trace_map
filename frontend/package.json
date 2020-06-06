@@ -1,0 +1,62 @@
+{
+  "name": "trace-map-frontend",
+  "description": "Frontend part for map tracer program",
+  "proxy": "http://localhost:4000",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shlizer/trace-map/trace-map.git"
+  },
+  "author": {
+    "name": "Krzysiek 'Shlizer' Hinc",
+    "email": "hinc.krzysiek+github@gmail.com",
+    "url": "https://khinc.pl"
+  },
+  "dependencies": {
+    "@types/node": "^14.0.1",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "7.1.8",
+    "@types/webpack-env": "1.15.2",
+    "node-sass": "^4.14.1",
+    "lato-font": "^3.0.0",
+    "react": "^16.12.0",
+    "react-app-rewire-hot-loader": "^2.0.1",
+    "react-app-rewired": "^2.1.6",
+    "react-dom": "^16.12.0",
+    "react-hot-loader": "^4.12.21",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "prop-types": "15.7.2",
+    "superagent": "5.2.2"
+  },
+  "devDependencies": {
+    "react-scripts": "3.4.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom--verbose",
+    "eject": "react-app-rewired eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "printWidth": 120
+  }
+}

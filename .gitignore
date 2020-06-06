@@ -1,0 +1,11 @@
+# Workbranch config
+.idea
+
+# Dependencies
+node_modules
+yarn-error.log
+
+# Dist files
+dist
+test
+*.d.ts

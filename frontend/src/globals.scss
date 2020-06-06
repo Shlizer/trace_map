@@ -1,0 +1,14 @@
+@import '~lato-font/css/lato-font.min.css';
+
+body {
+  font-family: 'Lato', 'Open Sans', sans-serif;
+  font-size: 12px;
+  background-color: var(--app-background);
+  color: var(--app-color);
+  cursor: default;
+  user-select: none;
+}
+
+b {
+  font-weight: bold;
+}
