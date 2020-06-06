@@ -1,8 +1,10 @@
-.list {
+.container {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   width: 25%;
-  min-width: 200px;
-  height: 100%;
+  min-width: 210px;
+  height: 100vh;
   background-color: var(--app-background);
   z-index: 10;
   transition: all 0.4s;
@@ -16,6 +18,7 @@
   }
 
   input {
+    flex-shrink: 0;
     background-color: var(--filter-background);
     width: 100%;
     box-sizing: border-box;
@@ -25,17 +28,32 @@
     margin: 5px 0 2em 0;
   }
 
-  .marker {
-    background-color: var(--marker-background);
-    padding: 5px;
-    margin-bottom: 2px;
+  .list {
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
 
-    &.travel {
-      background-color: var(--marker-background-travel);
-    }
+    .marker {
+      display: flex;
+      background-color: var(--marker-background);
+      padding: 5px;
+      margin-bottom: 2px;
+      white-space: nowrap;
 
-    &.hover {
-      background-color: var(--marker-background-hover);
+      & > span:first-child {
+        flex-grow: 1;
+        text-overflow: ellipsis;
+      overflow: hidden;
+      margin-right: 10px;
+      }
+
+      &.travel {
+        background-color: var(--marker-background-travel);
+      }
+
+      &.hover {
+        background-color: var(--marker-background-hover);
+      }
     }
   }
 

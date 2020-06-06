@@ -25,7 +25,8 @@ class MarkerFromList extends React.Component {
   render() {
     return (
       <div className={this.classes} onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
-        {this.props.id}
+        <span>{this.props.id}</span>
+        <span>[{this.props.lat.toFixed(3)}, {this.props.lng.toFixed(3)}]</span>
       </div>
     )
   }

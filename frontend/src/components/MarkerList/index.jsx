@@ -8,7 +8,7 @@ class MarkerList extends React.Component {
   state = { opened: true }
 
   get classes() {
-    return [styles.list, this.state.opened ? '' : styles.closed].join(' ')
+    return [styles.container, this.state.opened ? '' : styles.closed].join(' ')
   }
 
   toggleOpen = () => {
@@ -24,7 +24,9 @@ class MarkerList extends React.Component {
       <div className={this.classes}>
         <div className={styles.toggler} onClick={this.toggleOpen} />
         <input type='text' value={store.filter} onChange={this.changeFilter} placeholder='Filtruj...' />
-        {store.list.map(truck => <MarkerFromList key={truck.id} {...truck} />)}
+        <div className={styles.list}>
+          {store.list.map(truck => <MarkerFromList key={truck.id} {...truck} />)}
+        </div>
       </div>
     )
   }
