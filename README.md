@@ -27,9 +27,9 @@ There is no production config yet.
 
 ## Project requirements
 
-- [ ] Draw map with points from backend
-- [ ] List of points on map
-- [ ] Filtering points on map
+- [x] Draw map with points from backend
+- [x] List of points on map
+- [x] Filtering points on map
 - [ ] Group points in close range into clusters
 - [ ] Handle ~10k markers on map across tri-city
 

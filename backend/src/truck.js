@@ -1,11 +1,4 @@
-// Values for lat long around Poland
-const minLat = 54
-const maxLat = 49.17
-const minLng = 14
-const maxLng = 20.8
-const travelChance = 30 // percantage chance
-const thresholdLat = 0.08
-const thresholdLng = 0.04
+const { LAT_LIMIT, LNG_LIMIT, TRAVEL_CHANCE, THRESHOLD } = require('./variables')
 
 class Truck {
   constructor(id, lat, lng, travelling) {
@@ -18,11 +11,11 @@ class Truck {
   move() {
     if (this.travel) {
       const signLat = Math.random() >= 0.5
-      const valueLat = thresholdLat * Math.random()
+      const valueLat = THRESHOLD.lat * Math.random()
       this.lat = signLat ? this.lat + valueLat : this.lat - valueLat
 
       const signLng = Math.random() >= 0.5
-      const valueLng = thresholdLng * Math.random()
+      const valueLng = THRESHOLD.lng * Math.random()
       this.lng = signLng ? this.lng + valueLng : this.lng - valueLng
     }
   }
@@ -32,15 +25,15 @@ class Truck {
   }
 
   static randomLat() {
-    return minLat + (maxLat - minLat) * Math.random()
+    return LAT_LIMIT.min + (LAT_LIMIT.max - LAT_LIMIT.min) * Math.random()
   }
 
   static randomLng() {
-    return minLng + (maxLng - minLng) * Math.random()
+    return LNG_LIMIT.min + (LNG_LIMIT.max - LNG_LIMIT.min) * Math.random()
   }
 
   static randomTravelChance() {
-    return Math.random() < (travelChance / 100)
+    return Math.random() < (TRAVEL_CHANCE / 100)
   }
 }
 

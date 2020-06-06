@@ -2,9 +2,11 @@ var express = require('express')
 var app = express()
 var Truck = require('./truck')
 
+const { MARKER_NUMBER, TICK_RATE } = require('./variables')
+
 const truckList = []
 
-for (let i = 0; i < 20; ++i) {
+for (let i = 0; i < MARKER_NUMBER; ++i) {
   let truck = null
   do {
     truck = new Truck()
@@ -14,10 +16,10 @@ for (let i = 0; i < 20; ++i) {
 
 const moveTrucks = () => {
   truckList.forEach(truck => truck.move())
-  setTimeout(moveTrucks, 800)
+  setTimeout(moveTrucks, TICK_RATE)
 }
 
-setTimeout(moveTrucks, 800)
+setTimeout(moveTrucks, TICK_RATE)
 
 app.get(`/trucks`, function (req, res) {
   res.json(Object.keys(truckList).map(key => truckList[key]))

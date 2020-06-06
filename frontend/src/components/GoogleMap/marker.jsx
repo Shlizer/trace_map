@@ -2,7 +2,7 @@ import React from 'react'
 import { computed, decorate } from 'mobx'
 import { observer } from 'mobx-react'
 import store from '../../store'
-import styles from './style.module.scss'
+import styles from './marker.module.scss'
 
 class MarkerList extends React.Component {
   mouseOver = () => {

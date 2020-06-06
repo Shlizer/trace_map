@@ -14,13 +14,16 @@ class MarkerFromList extends React.Component {
   }
 
   get classes() {
-    return [styles.marker, store.hover === this.props.id ? styles.hover : ''].join(' ')
+    return [
+      styles.marker,
+      this.props.travel ? styles.travel : '',
+      store.hover === this.props.id ? styles.hover : ''
+    ].join(' ')
   }
 
   render() {
     return (
       <div className={this.classes} onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
-        {this.props.travel ? '* ' : ''}
         {this.props.id}
       </div>
     )
