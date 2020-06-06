@@ -2,18 +2,25 @@ var express = require('express')
 var app = express()
 var Truck = require('./truck')
 
+const truckList = []
+
+for (let i = 0; i < 20; ++i) {
+  let truck = null
+  do {
+    truck = new Truck()
+  } while (truckList.hasOwnProperty(truck.id))
+  truckList.push(truck)
+}
+
+const moveTrucks = () => {
+  truckList.forEach(truck => truck.move())
+  setTimeout(moveTrucks, 800)
+}
+
+setTimeout(moveTrucks, 800)
+
 app.get(`/trucks`, function (req, res) {
-  const truckList = {}
-  for (let i = 0; i < 4000; ++i) {
-    let truck = null
-
-    do {
-      truck = new Truck()
-    } while (truckList.hasOwnProperty(truck.id))
-
-    truckList[truck.id] = truck
-  }
-  res.json(truckList)
+  res.json(Object.keys(truckList).map(key => truckList[key]))
 })
 
 app.listen(4000, function () {

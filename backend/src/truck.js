@@ -1,14 +1,30 @@
 // Values for lat long around Poland
 const minLat = 54
-const maxLat = 53.9
-const minLong = 18
-const maxLong = 19.6
+const maxLat = 49.17
+const minLng = 14
+const maxLng = 20.8
+const travelChance = 30 // percantage chance
+const thresholdLat = 0.08
+const thresholdLng = 0.04
 
 class Truck {
-  constructor(id, lat, long) {
+  constructor(id, lat, lng, travelling) {
     this.id = id === undefined ? Truck.randomId() : id
     this.lat = lat === undefined ? Truck.randomLat() : lat
-    this.long = long === undefined ? Truck.randomLong() : long
+    this.lng = lng === undefined ? Truck.randomLng() : lng
+    this.travel = travelling === undefined ? Truck.randomTravelChance() : travelling
+  }
+
+  move() {
+    if (this.travel) {
+      const signLat = Math.random() >= 0.5
+      const valueLat = thresholdLat * Math.random()
+      this.lat = signLat ? this.lat + valueLat : this.lat - valueLat
+
+      const signLng = Math.random() >= 0.5
+      const valueLng = thresholdLng * Math.random()
+      this.lng = signLng ? this.lng + valueLng : this.lng - valueLng
+    }
   }
 
   static randomId() {
@@ -19,8 +35,12 @@ class Truck {
     return minLat + (maxLat - minLat) * Math.random()
   }
 
-  static randomLong() {
-    return minLong + (maxLong - minLong) * Math.random()
+  static randomLng() {
+    return minLng + (maxLng - minLng) * Math.random()
+  }
+
+  static randomTravelChance() {
+    return Math.random() < (travelChance / 100)
   }
 }
 
