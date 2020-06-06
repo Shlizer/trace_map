@@ -1,15 +1,40 @@
 import React from 'react'
+import { computed, decorate } from 'mobx'
+import { observer } from 'mobx-react'
+import store from '../../store'
 import styles from './style.module.scss'
 
-export default class MarkerList extends React.Component {
+class MarkerList extends React.Component {
+  mouseOver = () => {
+    store.hover = this.props.id
+  }
+
+  mouseOut = () => {
+    store.hover = null
+  }
+
+  get className() {
+    return [
+      styles.pin,
+      this.props.travel ? styles.travel : '',
+      store.hover === this.props.id ? styles.hover : ''
+    ].join(' ')
+  }
+
   render() {
     return (
       <div>
-        <div className={styles.pin}>
+        <div className={this.className} onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
           <span>{this.props.id}</span>
         </div>
-        {this.props.travel ? <div className={styles.pulse} /> : null}
+        <div className={[styles.pulse, this.props.travel ? styles.travel : ''].join(' ')} />
       </div>
     )
   }
 }
+
+decorate(MarkerList, {
+  className: computed
+})
+
+export default observer(MarkerList)
