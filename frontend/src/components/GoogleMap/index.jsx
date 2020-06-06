@@ -28,7 +28,7 @@ class GoogleMap extends React.Component {
           options={this.mapOptions}
         >
           {(store.list || []).map(truck => (
-            <Marker id={truck.id} {...truck} />
+            <Marker key={truck.id} {...truck} />
           ))}
         </GoogleMapReact>
       </div>
