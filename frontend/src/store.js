@@ -6,7 +6,7 @@ class Store {
     hover = null
 
     constructor() {
-        setTimeout(this.fetchList, 1000)
+        setTimeout(this.fetchList, 100)
     }
 
     get list() {
@@ -26,9 +26,9 @@ class Store {
         fetch('/trucks').then(result => result.json())
             .then(truckList => {
                 if (truckList && truckList.length) this.setList(truckList)
-                setTimeout(this.fetchList, 10000)
+                setTimeout(this.fetchList, 100)
             })
-            .catch(e => setTimeout(this.fetchList, 10000))
+            .catch(e => setTimeout(this.fetchList, 100))
     }
 }
 

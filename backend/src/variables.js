@@ -1,5 +1,5 @@
-const MARKER_NUMBER = 20
-const TICK_RATE = 800 // in miliseconds
+const MARKER_NUMBER = 50
+const TICK_RATE = { min: 500, max: 2000 } // in miliseconds
 
 const LAT_LIMIT = { min: 49.17, max: 54 } // Values for lat & lng around Poland
 const LNG_LIMIT = { min: 14, max: 20.8 }

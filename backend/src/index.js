@@ -2,24 +2,18 @@ var express = require('express')
 var app = express()
 var Truck = require('./truck')
 
-const { MARKER_NUMBER, TICK_RATE } = require('./variables')
+const { MARKER_NUMBER } = require('./variables')
 
 const truckList = []
 
 for (let i = 0; i < MARKER_NUMBER; ++i) {
-  let truck = null
+  let id = null
   do {
-    truck = new Truck()
-  } while (truckList.hasOwnProperty(truck.id))
-  truckList.push(truck)
-}
+    id = Truck.randomId()
+  } while (truckList.hasOwnProperty(id))
 
-const moveTrucks = () => {
-  truckList.forEach(truck => truck.move())
-  setTimeout(moveTrucks, TICK_RATE)
+  truckList.push(new Truck({ id }))
 }
-
-setTimeout(moveTrucks, TICK_RATE)
 
 app.get(`/trucks`, function (req, res) {
   res.json(Object.keys(truckList).map(key => truckList[key]))

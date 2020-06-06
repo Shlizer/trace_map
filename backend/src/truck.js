@@ -1,27 +1,20 @@
-const { LAT_LIMIT, LNG_LIMIT, TRAVEL_CHANCE, THRESHOLD } = require('./variables')
+const { LAT_LIMIT, LNG_LIMIT, TRAVEL_CHANCE, THRESHOLD, TICK_RATE } = require('./variables')
 
 class Truck {
-  constructor(id, lat, lng, travelling) {
-    this.id = id === undefined ? Truck.randomId() : id
-    this.lat = lat === undefined ? Truck.randomLat() : lat
-    this.lng = lng === undefined ? Truck.randomLng() : lng
-    this.travel = travelling === undefined ? Truck.randomTravelChance() : travelling
+  constructor({ id = Truck.randomId(), lat = Truck.randomLat(), lng = Truck.randomLng(), travelling = Truck.randomTravelChance() }) {
+    this.id = id
+    this.lat = lat
+    this.lng = lng
+    this.travel = travelling
+    setTimeout(this.move.bind(this), Truck.getTickRate())
   }
 
-  move() {
-    if (this.travel) {
-      const signLat = Math.random() >= 0.5
-      const valueLat = THRESHOLD.lat * Math.random()
-      this.lat = signLat ? this.lat + valueLat : this.lat - valueLat
-
-      const signLng = Math.random() >= 0.5
-      const valueLng = THRESHOLD.lng * Math.random()
-      this.lng = signLng ? this.lng + valueLng : this.lng - valueLng
-    }
+  static getTickRate() {
+    return (TICK_RATE.min + (TICK_RATE.max - TICK_RATE.min) * Math.random()).toFixed(0)
   }
 
   static randomId() {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    return Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
   }
 
   static randomLat() {
@@ -34,6 +27,19 @@ class Truck {
 
   static randomTravelChance() {
     return Math.random() < (TRAVEL_CHANCE / 100)
+  }
+
+  move() {
+    if (this.travel) {
+      const signLat = Math.random() >= 0.5
+      const valueLat = THRESHOLD.lat * Math.random()
+      this.lat = signLat ? this.lat + valueLat : this.lat - valueLat
+
+      const signLng = Math.random() >= 0.5
+      const valueLng = THRESHOLD.lng * Math.random()
+      this.lng = signLng ? this.lng + valueLng : this.lng - valueLng
+      setTimeout(this.move.bind(this), Truck.getTickRate())
+    }
   }
 }
 
