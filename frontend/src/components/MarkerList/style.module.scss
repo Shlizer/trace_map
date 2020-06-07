@@ -12,7 +12,7 @@
   &.closed {
     transform: translateX(-100%);
 
-    .toggler:after {
+    .togglerOpen:after {
       content: '>';
     }
   }
@@ -57,9 +57,8 @@
     }
   }
 
-  .toggler {
+  .togglerOpen, .togglerFetch {
     position: absolute;
-    top: 5px;
     right: -30px;
     width: 30px;
     height: 30px;
@@ -67,12 +66,37 @@
     cursor: pointer;
 
     &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+
+  .togglerOpen {
+    top: 5px;
+
+    &:after {
       content: '<';
       line-height: 30px;
       font-size: 17px;
       font-weight: bold;
-      margin-left: 10px;
-      position: relative;
+    }
+  }
+
+  .togglerFetch {
+    top: 40px;
+
+    &:after {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: green;
+    }
+
+    &.closed:after {
+      background-color: red;
     }
   }
 }

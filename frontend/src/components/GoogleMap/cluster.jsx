@@ -5,20 +5,24 @@ import { observer } from 'mobx-react'
 import store from '../../store'
 import styles from './marker.module.scss'
 
-class Marker extends React.Component {
+class Cluster extends React.Component {
   mouseOver = () => {
-    store.setHover(this.props.id)
+    store.setHover(this.props.points.map(point => point.id))
   }
 
   mouseOut = () => {
     store.setHover()
   }
 
+  get isHovered() {
+    return store.hover.findIndex(id => this.props.points.findIndex(point => point.id === id) >= 0) >= 0
+  }
+
   get className() {
     return [
       styles.pin,
       this.props.travel ? styles.travel : '',
-      store.isHovered(this.props.id) ? styles.hover : ''
+      this.isHovered ? styles.hover : ''
     ].join(' ')
   }
 
@@ -26,23 +30,23 @@ class Marker extends React.Component {
     return (
       <div>
         <div className={this.className} onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
-          <span>{this.props.id}</span>
+          <span>{this.props.numPoints}</span>
         </div>
-        <div className={[styles.pulse, this.props.travel ? styles.travel : ''].join(' ')} />
+        <div className={[styles.pulse].join(' ')} />
       </div>
     )
   }
 }
 
-Marker.propTypes = {
-  id: PropTypes.string.isRequired,
-  travel: PropTypes.bool.isRequired,
+Cluster.propTypes = {
+  numPoints: PropTypes.number.isRequired,
   lat: PropTypes.number.isRequired,
   lng: PropTypes.number.isRequired
 }
 
-decorate(Marker, {
+decorate(Cluster, {
+  isHovered: computed,
   className: computed
 })
 
-export default observer(Marker)
+export default observer(Cluster)

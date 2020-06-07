@@ -24,6 +24,7 @@
     "mobx-react": "^6.2.2",
     "mobx": "^5.15.4",
     "prop-types": "^15.7.2",
+    "points-cluster": "0.1.4",
     "superagent": "^5.2.2"
   },
   "devDependencies": {
