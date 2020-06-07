@@ -1,12 +1,38 @@
 import { action, computed, observable, decorate } from 'mobx'
 
+const RECONNECT_TIME = 500
+
 class Store {
+    ws = null
     markers = {}
     filter = ''
     hover = null
 
     constructor() {
-        setTimeout(this.fetchList, 100)
+        this.wsConnect()
+    }
+
+    wsConnect() {
+        this.ws = new WebSocket('ws://localhost:4000')
+        this.ws.onopen = () => this.ws.send('init')
+
+        this.ws.onmessage = event => {
+            try {
+                const list = JSON.parse(event.data)
+                if (Array.isArray(list)) this.setList(list)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        this.ws.onclose = () => {
+            console.log(`SERVER CONNECTION LOSS. RECONNECTING IN ${RECONNECT_TIME}ms`)
+            setTimeout(this.wsCheck.bind(this), RECONNECT_TIME)
+        }
+    }
+
+    wsCheck() {
+        if (!this.ws || this.ws.readyState === WebSocket.CLOSED) this.wsConnect();
     }
 
     get list() {
@@ -18,17 +44,9 @@ class Store {
 
     setList(list) {
         for (let i in list) {
-            this.markers[i] = { ...(this.markers[i] || {}), ...list[i] }
+            const id = list[i].id
+            this.markers[id] = { ...(this.markers[id] || {}), ...list[i] }
         }
-    }
-
-    fetchList = () => {
-        fetch('/trucks').then(result => result.json())
-            .then(truckList => {
-                if (truckList && truckList.length) this.setList(truckList)
-                setTimeout(this.fetchList, 100)
-            })
-            .catch(e => setTimeout(this.fetchList, 100))
     }
 }
 

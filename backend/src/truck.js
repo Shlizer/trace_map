@@ -1,11 +1,12 @@
 const { LAT_LIMIT, LNG_LIMIT, TRAVEL_CHANCE, THRESHOLD, TICK_RATE } = require('./variables')
 
 class Truck {
-  constructor({ id = Truck.randomId(), lat = Truck.randomLat(), lng = Truck.randomLng(), travelling = Truck.randomTravelChance() }) {
+  constructor({ id = Truck.randomId(), lat = Truck.randomLat(), lng = Truck.randomLng(), travelling = Truck.randomTravelChance(), onMove = () => { } } = {}) {
     this.id = id
     this.lat = lat
     this.lng = lng
     this.travel = travelling
+    this.onMove = onMove
     setTimeout(this.move.bind(this), Truck.getTickRate())
   }
 
@@ -38,6 +39,7 @@ class Truck {
       const signLng = Math.random() >= 0.5
       const valueLng = THRESHOLD.lng * Math.random()
       this.lng = signLng ? this.lng + valueLng : this.lng - valueLng
+      this.onMove(this)
       setTimeout(this.move.bind(this), Truck.getTickRate())
     }
   }

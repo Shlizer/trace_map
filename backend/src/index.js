@@ -1,24 +1,33 @@
 var express = require('express')
-var app = express()
+var http = require('http')
+var socket = require('ws')
 var Truck = require('./truck')
-
 const { MARKER_NUMBER } = require('./variables')
 
-const truckList = []
+const app = express()
+const server = http.createServer(app)
+const wss = new socket.Server({ server })
 
-for (let i = 0; i < MARKER_NUMBER; ++i) {
-  let id = null
-  do {
-    id = Truck.randomId()
-  } while (truckList.hasOwnProperty(id))
+// LAUNCH WS SERVER
+wss.on('connection', ws => {
+  const truckList = []
+  const onTruckMove = truck => ws.send(JSON.stringify([truck]))
 
-  truckList.push(new Truck({ id }))
-}
+  ws.on('message', () => {
+    ws.send(JSON.stringify(Object.keys(truckList).map(key => truckList[key])));
+  });
 
-app.get(`/trucks`, function (req, res) {
-  res.json(Object.keys(truckList).map(key => truckList[key]))
-})
+  // GENERATE TRUCKS
+  for (let i = 0; i < MARKER_NUMBER; ++i) {
+    let id = null
+    do {
+      id = Truck.randomId()
+    } while (truckList.hasOwnProperty(id))
 
-app.listen(4000, function () {
-  console.log('App listening on port 4000!')
-})
+    truckList.push(new Truck({ id, onMove: onTruckMove }))
+  }
+});
+
+server.listen(process.env.PORT || 4000, () => {
+  console.log(`Server started on port ${server.address().port}`);
+});
