@@ -4,19 +4,25 @@ var Truck = require('./truck')
 
 const { MARKER_NUMBER } = require('./variables')
 
-const truckList = []
+const truckList = {}
+const truckListMoving = {}
 
 for (let i = 0; i < MARKER_NUMBER; ++i) {
   let id = null
   do {
     id = Truck.randomId()
-  } while (truckList.hasOwnProperty(id))
+  } while (truckList[id])
 
-  truckList.push(new Truck({ id }))
+  truckList[id] = new Truck({ id })
+  if (truckList[id].travel) truckListMoving[id] = truckList[id]
 }
 
 app.get(`/trucks`, function (req, res) {
-  res.json(Object.keys(truckList).map(key => truckList[key]))
+  res.json(truckList)
+})
+
+app.get(`/trucksMove`, function (req, res) {
+  res.json(truckListMoving)
 })
 
 app.listen(4000, function () {

@@ -1,14 +1,17 @@
-import supercluster from 'points-cluster'
 import { action, computed, observable, decorate } from 'mobx'
+import supercluster from 'points-cluster'
+import worker_script from './worker';
 
 const FETCH_TIME = 100
 const CLUSTER_RADIUS = 80
 
 class Store {
+    firstFetch = true
     isFetching = true
     markers = {}
     filter = ''
     hover = []
+    worker = null
     mapState = {
         center: { lat: 52.5, lng: 17 },
         zoom: 7,
@@ -46,9 +49,9 @@ class Store {
         })(this.mapState);
     };
 
-    setList(list) {
+    setList(list = {}) {
         for (let i in list) {
-            this.markers[i] = { ...(this.markers[i] || {}), ...list[i] }
+            this.markers[list[i].id] = { ...(this.markers[list[i].id] || {}), ...list[i] }
         }
     }
 
@@ -66,14 +69,16 @@ class Store {
     }
 
     fetchList = () => {
-        fetch('/trucks').then(result => result.json())
-            .then(truckList => {
-                if (this.isFetching) {
-                    if (truckList && truckList.length) this.setList(truckList)
-                    setTimeout(this.fetchList, FETCH_TIME)
-                }
-            })
-            .catch(e => setTimeout(this.fetchList, FETCH_TIME))
+        const endpoint = this.firstFetch ? '/trucks' : '/trucksMove'
+        this.firstFetch = false
+
+        this.worker = new Worker(worker_script);
+        this.worker.onmessage = ({ data }) => {
+            if (data.list && this.isFetching) this.setList(data.list)
+            if (data.error) console.log('Worker error: ', data.error)
+            setTimeout(this.fetchList, FETCH_TIME)
+        }
+        this.worker.postMessage({ base: document.baseURI, endpoint })
     }
 }
 
