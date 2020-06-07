@@ -2,6 +2,7 @@ import supercluster from 'points-cluster'
 import { action, computed, observable, decorate } from 'mobx'
 
 const FETCH_TIME = 100
+const CLUSTER_RADIUS = 80
 
 class Store {
     isFetching = true
@@ -9,7 +10,7 @@ class Store {
     filter = ''
     hover = []
     mapState = {
-        center: { lat: 52.5, lng: 18.8 },
+        center: { lat: 52.5, lng: 17 },
         zoom: 7,
         bounds: null
     }
@@ -41,7 +42,7 @@ class Store {
         return supercluster(this.list, {
             minZoom: 0,
             maxZoom: 16,
-            radius: 80,
+            radius: CLUSTER_RADIUS,
         })(this.mapState);
     };
 

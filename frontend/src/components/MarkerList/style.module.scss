@@ -1,5 +1,5 @@
 .container {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 25%;
@@ -10,7 +10,8 @@
   transition: all 0.4s;
 
   &.closed {
-    transform: translateX(-100%);
+    width: 0;
+    min-width: 0;
 
     .togglerOpen:after {
       content: '>';
