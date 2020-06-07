@@ -1,14 +1,12 @@
-var express = require('express')
-var app = express()
-var Truck = require('./truck')
+const express = require('express')
+import Truck from './truck'
+import { MARKER_NUMBER } from './variables'
 
-const { MARKER_NUMBER } = require('./variables')
-
+const app = express()
 const truckList = {}
 const truckListMoving = {}
 
-for (let i = 0; i < MARKER_NUMBER; ++i) {
-  let id = null
+for (let i = 0, id = ''; i < MARKER_NUMBER; ++i) {
   do {
     id = Truck.randomId()
   } while (truckList[id])

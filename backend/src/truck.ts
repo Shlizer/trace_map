@@ -1,16 +1,24 @@
-const { LAT_LIMIT, LNG_LIMIT, TRAVEL_CHANCE, THRESHOLD, TICK_RATE } = require('./variables')
+import { LAT_LIMIT, LNG_LIMIT, TRAVEL_CHANCE, THRESHOLD, TICK_RATE } from './variables'
 
-class Truck {
-  constructor({ id = Truck.randomId(), lat = Truck.randomLat(), lng = Truck.randomLng(), travelling = Truck.randomTravelChance() }) {
+export default class Truck {
+  id: string
+  lat: number
+  lng: number
+  travel: boolean
+
+  constructor(
+    { id = Truck.randomId(), lat = Truck.randomLat(), lng = Truck.randomLng(), travel = Truck.randomTravelChance() }
+      : { id?: string, lat?: number, lng?: number, travel?: boolean }
+  ) {
     this.id = id
     this.lat = lat
     this.lng = lng
-    this.travel = travelling
+    this.travel = travel
     setTimeout(this.move.bind(this), Truck.getTickRate())
   }
 
-  static getTickRate() {
-    return (TICK_RATE.min + (TICK_RATE.max - TICK_RATE.min) * Math.random()).toFixed(0)
+  static getTickRate(): number {
+    return TICK_RATE.min + (TICK_RATE.max - TICK_RATE.min) * Math.random()
   }
 
   static randomId() {
@@ -42,5 +50,3 @@ class Truck {
     }
   }
 }
-
-module.exports = Truck
