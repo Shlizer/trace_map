@@ -1,4 +1,5 @@
 const workercode = () => {
+    // eslint-disable-next-line
     self.onmessage = ({ data }) => {
         fetch(new URL(data.endpoint, data.base)).then(result => result.json())
             .then(list => this.postMessage({ list }))
