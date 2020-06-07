@@ -15,6 +15,8 @@ class GoogleMap extends React.Component {
   get mapOptions() {
     return {
       disableDefaultUI: true,
+      minZoom: 4,
+      maxZoom: 19,
     }
   }
 

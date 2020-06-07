@@ -35,5 +35,5 @@ There is no production config yet.
 
 ## Author and license
 
-Author: Krzysztof 'Shlizer' Hinc
+Author: Krzysztof 'Shlizer' Hinc\
 License: MIT
