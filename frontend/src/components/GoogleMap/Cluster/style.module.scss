@@ -1,0 +1,28 @@
+.pin {
+  width: 30px;
+  height: 29px;
+  border-radius: 50% 50% 50% 0;
+  background-color: var(--cluster-background);
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -20px 0 0 -20px;
+  cursor: pointer;
+
+  &.hover, &.hover span {
+    z-index: 10;
+    background:var(--cluster-background-hover);
+  }
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    font-weight: bold;
+    font-size: 1.4em;
+    background: var(--cluster-background);
+    border-radius: 10px;
+  }
+}

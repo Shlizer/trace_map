@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { computed, decorate } from 'mobx'
 import { observer } from 'mobx-react'
-import store from '../../store'
-import styles from './marker.module.scss'
+import store from '../../../store'
+import styles from './style.module.scss'
 
 class Marker extends React.Component {
   mouseOver = () => {

@@ -2,8 +2,8 @@ import React from 'react'
 import { decorate, computed } from 'mobx'
 import { observer } from 'mobx-react'
 import store from '../../store'
-import Marker from './marker'
-import Cluster from './cluster'
+import Marker from './Marker'
+import Cluster from './Cluster'
 import styles from './style.module.scss'
 
 class MarkerList extends React.Component {

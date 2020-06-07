@@ -25,36 +25,13 @@
     border: 0;
     padding: 8px;
     font-size: 1.2em;
-    margin: 5px 0 2em 0;
+    margin: 5px 0 5px 0;
   }
 
   .list {
     flex-grow: 1;
     overflow-x: hidden;
     overflow-y: auto;
-
-    .marker {
-      display: flex;
-      background-color: var(--marker-background);
-      padding: 5px;
-      margin-bottom: 2px;
-      white-space: nowrap;
-
-      & > span:first-child {
-        flex-grow: 1;
-        text-overflow: ellipsis;
-      overflow: hidden;
-      margin-right: 10px;
-      }
-
-      &.travel {
-        background-color: var(--marker-background-travel);
-      }
-
-      &.hover {
-        background-color: var(--marker-background-hover);
-      }
-    }
   }
 
   .togglerOpen, .togglerFetch {

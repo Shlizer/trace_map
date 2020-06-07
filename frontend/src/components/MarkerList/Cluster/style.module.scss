@@ -1,0 +1,27 @@
+.cluster {
+  background-color: var(--cluster-background);
+  padding: 10px 0;
+  margin: 1px 0;
+
+  .title {
+    display: flex;
+    white-space: nowrap;
+    padding: 0 5px;
+    cursor: pointer;
+
+    & > span:first-child {
+      flex-grow: 1;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-right: 10px;
+    }
+  }
+
+  &.opened .title {
+    margin-bottom: 10px;
+  }
+
+  &.hover {
+    background-color: var(--cluster-background-hover);
+  }
+}

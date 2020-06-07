@@ -1,0 +1,23 @@
+.marker {
+  display: flex;
+  background-color: var(--marker-background);
+  padding: 5px;
+  margin-left: 10px;
+  white-space: nowrap;
+  cursor: default;
+
+  & > span:first-child {
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  &.travel {
+    background-color: var(--marker-background-travel);
+  }
+
+  &.hover {
+    background-color: var(--marker-background-hover);
+  }
+}

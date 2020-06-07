@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { computed, decorate } from 'mobx'
 import { observer } from 'mobx-react'
-import store from '../../store'
-import styles from './marker.module.scss'
+import store from '../../../store'
+import styles from './style.module.scss'
 
 class Cluster extends React.Component {
   mouseOver = () => {
@@ -21,7 +21,6 @@ class Cluster extends React.Component {
   get className() {
     return [
       styles.pin,
-      this.props.travel ? styles.travel : '',
       this.isHovered ? styles.hover : ''
     ].join(' ')
   }
@@ -32,7 +31,6 @@ class Cluster extends React.Component {
         <div className={this.className} onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
           <span>{this.props.numPoints}</span>
         </div>
-        <div className={[styles.pulse].join(' ')} />
       </div>
     )
   }
